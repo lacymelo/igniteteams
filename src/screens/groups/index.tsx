@@ -1,17 +1,12 @@
 import { StyleSheet, Text, View } from "react-native"
+import { Container, Title } from "./styles"
 
 export function Groups() {
     return (
-        <View>
-            <Text>
+        <Container>
+            <Title>
                 Groups
-            </Text>
-        </View>
+            </Title>
+        </Container>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-
-    }
-})

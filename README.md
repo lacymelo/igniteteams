@@ -15,17 +15,27 @@ Desenvolvimento do projeto Ignite Teams. A proposta de ajudar a organizar pessoa
 -  [Typescript](https://www.typescriptlang.org/)
 -  [axios](https://github.com/axios/axios)
 
-## 🔖 Configurações do Layout WEB
+## 🔖 Configurações do Layout
 
 ---
 ```cl
+  💻 Instalar extensão do vscode
+  - ✨ vscode-style-components
+
   💻 Comando para criar o projeto
   - ✨ npx create-expo-app --template
 
   🛠️ Comando para executar o projeto
-  - ✨ npx expo start
-```
+  - ✨ expo start
 
+  🛠️ Comando para instal o Path Mapping no projeto,  Essa estratégia facilita bastante a importação dos arquivos no código ao trabalharmos com o @ em vez de vários ../
+  - ✨ yarn add --dev babel-plugin-module-resolver
+
+  🛠️ Comando para instalar o styled component, que permite utilizar css no javascript
+  - ✨ yarn add styled-components
+  - ✨ yarn add --save-dev @types/styled-components @types/styled-components-react-native
+
+```
 ## :arrow_forward: Como Executar
 
 ---
