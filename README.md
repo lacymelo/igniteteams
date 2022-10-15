@@ -35,6 +35,9 @@ Desenvolvimento do projeto Ignite Teams. A proposta de ajudar a organizar pessoa
   - ✨ yarn add styled-components
   - ✨ yarn add --save-dev @types/styled-components @types/styled-components-react-native
 
+  🛠️ Comando para adicionar a biblioteca de fontes do Expo que disponibiliza basicamente todas as fontes Google
+  - ✨ npx expo install @expo-google-fonts/roboto
+
 ```
 ## :arrow_forward: Como Executar
 
