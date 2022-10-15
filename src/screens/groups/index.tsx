@@ -1,11 +1,16 @@
-import { Container, Title } from "./styles"
+import { Header } from "@components/Header"
+import { Highlight } from "@components/Highlight"
+import { Container } from "./styles"
 
 export function Groups() {
     return (
         <Container>
-            <Title>
-                Groups
-            </Title>
+            <Header />
+
+            <Highlight
+                title="Turmas"
+                subtitle="Jogue com a sua turma"
+            />
         </Container>
     )
 }

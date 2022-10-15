@@ -38,6 +38,10 @@ Desenvolvimento do projeto Ignite Teams. A proposta de ajudar a organizar pessoa
   🛠️ Comando para adicionar a biblioteca de fontes do Expo que disponibiliza basicamente todas as fontes Google
   - ✨ npx expo install @expo-google-fonts/roboto
 
+  🛠️ Comando para adicionar a biblioteca de ícones
+  - ✨ yarn add phosphor-react-native
+  - ✨ npx expo install react-native-svg
+
 ```
 ## :arrow_forward: Como Executar
 
