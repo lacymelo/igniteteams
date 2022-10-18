@@ -22,6 +22,9 @@ Desenvolvimento do projeto Ignite Teams. A proposta de ajudar a organizar pessoa
   💻 Instalar extensão do vscode
   - ✨ vscode-style-components
 
+  💻 Instalar extensão do TypeScript Error para verificação de erros
+  - ✨ TypeScript Error Translator
+
   💻 Comando para criar o projeto
   - ✨ npx create-expo-app --template
 

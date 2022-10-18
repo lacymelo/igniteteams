@@ -1,5 +1,5 @@
 import { UsersThree } from "phosphor-react-native"
-import { TouchableOpacity } from "react-native"
+import { TouchableOpacity, FlatList } from "react-native"
 import styled from "styled-components/native"
 
 export const Container = styled(TouchableOpacity)`
@@ -11,6 +11,11 @@ export const Container = styled(TouchableOpacity)`
     align-items: center;
     padding: 24px;
     margin-bottom: 12px;
+`
+
+export const TeamList = styled.View`
+    flex: 1;
+    width: 100%;
 `
 
 export const Title = styled.Text`
