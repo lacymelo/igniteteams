@@ -7,9 +7,3 @@ export const Container = styled.View`
     justify-content: flex-start;
     padding: 24px;
 `
-
-export const Title = styled.Text`
-    color: #FFF;
-    font-size: 32px;
-`
-
