@@ -11,5 +11,4 @@ export const Container = styled(TextInput)`
     font-size: ${({ theme }) => theme.FONT_SIZE.MD}px;
     border-radius: 6px;
     padding: 16px;
-    margin-bottom: 24px;
 `

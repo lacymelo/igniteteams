@@ -16,6 +16,7 @@ export const Container = styled(TouchableOpacity) <Props> `
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-top: 24px;
 `
 
 export const Title = styled.Text`
