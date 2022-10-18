@@ -1,16 +1,16 @@
-import { Container } from "./styles"
+import { Container, TeamList } from "./styles"
 import { FlatList } from "react-native"
 import { GroupCard } from "@components/GroupCard"
 import { Header } from "@components/Header"
 import { Highlight } from "@components/Highlight"
 import { useState } from "react"
-import { TeamList } from "@components/GroupCard/styles"
 import { ListEmpty } from "@components/ListEmpty"
 import { Button } from "@components/Button"
 
 export function Groups() {
     const [groups, setGroups] = useState<string[]>(
-        ["Galera do LABEX", 'Galera Rocketseat']
+        []
+        // ["Galera do LABEX", 'Galera Rocketseat']
     )
 
     return (
@@ -27,6 +27,7 @@ export function Groups() {
                 <FlatList
                     data={groups}
                     keyExtractor={(item) => item}
+                    contentContainerStyle={groups?.length === 0 && { flex: 1 }}
                     renderItem={({ item }) =>
                         <GroupCard title={item}
                         />
