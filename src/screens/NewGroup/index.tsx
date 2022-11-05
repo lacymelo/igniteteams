@@ -2,9 +2,16 @@ import { Button } from "@components/Button";
 import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
 import { Input } from "@components/Input";
+import { useNavigation } from "@react-navigation/native";
 import { Container, Content, Icon } from "./styles";
 
 export function NewGroup() {
+    const navigation = useNavigation()
+
+    function handlePlayers() {
+        navigation.navigate("players", { group: 'rockeseat' })
+    }
+
     return (
         <Container>
             <Header
@@ -25,6 +32,7 @@ export function NewGroup() {
 
                 <Button
                     title="Criar"
+                    onPress={handlePlayers}
                 />
             </Content>
         </Container>

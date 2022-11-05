@@ -18,33 +18,40 @@ Desenvolvimento do projeto Ignite Teams. A proposta de ajudar a organizar pessoa
 ## 🔖 Configurações do Layout
 
 ---
-```cl
-  💻 Instalar extensão do vscode
-  - ✨ vscode-style-components
 
-  💻 Instalar extensão do TypeScript Error para verificação de erros
-  - ✨ TypeScript Error Translator
+```bash
+  # 💻 Instalar extensão do vscode
+      ✨ vscode-style-components
 
-  💻 Comando para criar o projeto
-  - ✨ npx create-expo-app --template
+  # 💻 Instalar extensão do TypeScript Error para verificação de erros
+      ✨ TypeScript Error Translator
 
-  🛠️ Comando para executar o projeto
-  - ✨ expo start
+  # 💻 Comando para criar o projeto
+      ✨ npx create-expo-app --template
 
-  🛠️ Comando para instal o Path Mapping no projeto,  Essa estratégia facilita bastante a importação dos arquivos no código ao trabalharmos com o @ em vez de vários ../
-  - ✨ yarn add --dev babel-plugin-module-resolver
+  # 🛠️ Comando para executar o projeto
+      ✨ expo start
 
-  🛠️ Comando para instalar o styled component, que permite utilizar css no javascript
-  - ✨ yarn add styled-components
-  - ✨ yarn add --save-dev @types/styled-components @types/styled-components-react-native
+  # 🛠️ Comando para instal o Path Mapping no projeto,  Essa estratégia facilita bastante a importação dos arquivos no código ao trabalharmos com o @ em vez de vários ../
+      ✨ yarn add --dev babel-plugin-module-resolver
 
-  🛠️ Comando para adicionar a biblioteca de fontes do Expo que disponibiliza basicamente todas as fontes Google
-  - ✨ npx expo install @expo-google-fonts/roboto
+  # 🛠️ Comando para instalar o styled component, que permite utilizar css no javascript
+      ✨ yarn add styled-components
+      ✨ yarn add --save-dev @types/styled-components @types/styled-components-react-native
 
-  🛠️ Comando para adicionar a biblioteca de ícones
-  - ✨ yarn add phosphor-react-native
-  - ✨ npx expo install react-native-svg
+  # 🛠️ Comando para adicionar a biblioteca de fontes do Expo que disponibiliza basicamente todas as fontes Google
+      ✨ npx expo install @expo-google-fonts/roboto
 
+  # 🛠️ Comando para adicionar a biblioteca de ícones
+      ✨ yarn add phosphor-react-native
+      ✨ npx expo install react-native-svg
+
+  # 🛠️ Comando para adicionar a biblioteca de navegação entre telas
+      ✨ yarn add @react-navigation/native
+
+    ## 🔖 Dependências que o react navigation precisa
+        ✨ npx expo install react-native-screens react-native-safe-area-context
+        ✨ yarn add @react-navigation/native-stack
 ```
 ## :arrow_forward: Como Executar
 
