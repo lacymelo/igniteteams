@@ -1,8 +1,9 @@
 
-import { useEffect, useState } from 'react'
-import { FlatList } from "react-native"
-import { useRoute } from '@react-navigation/native'
+import { useState, useCallback } from 'react'
+import { Alert, FlatList } from 'react-native'
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { Container, Form, HeaderList, NumbersOfPlayers } from "./styles"
+
 import { Header } from "@components/Header"
 import { Highlight } from "@components/Highlight"
 import { Input } from "@components/Input"
@@ -11,25 +12,58 @@ import { Filter } from "@components/Filter"
 import { PlayerCard } from '@components/PlayerCard'
 import { ListEmpty } from '@components/ListEmpty'
 import { Button } from '@components/Button'
+import { api } from '@services/api'
 
 type RouteParams = {
-    group: string
+    id: string
+}
+
+type Players = {
+    id: string
+    name: string
+    team: string
 }
 
 export function Players() {
     const route = useRoute()
-    const { group } = route.params as RouteParams
-
+    const navigation = useNavigation()
+    const { id } = route.params as RouteParams
     const [groupName, setGroupName] = useState('')
-    const [team, setTeam] = useState('Time A')
+    const [team, setTeam] = useState('A')
+    const [players, setPlayers] = useState<Players[]>([])
 
-    useEffect(() => {
-        setGroupName(group)
-    }, [])
+    async function handlePlayersList() {
+        await api.get(`/group/groupSearch/${id}/${team}`)
+            .then((response) => {
+                const { id, name, players } = response.data
 
-    // const [players, setPlayers] = useState([])
-    const [players, setPlayers] = useState(
-        ['Lucas', 'Vitória', 'João', 'Jônatas', 'Rodrigo', "Diana", 'Leonardo', 'Odeth', 'Giovana'])
+                setGroupName(name)
+                setPlayers(players)
+            })
+    }
+
+    async function handlePlayerRemove(id: string) {
+        await api.get(`/player/remove/${id}`)
+            .then(response => {
+                console.log(response.data)
+            }).catch(err => {
+                Alert.alert(String(err.message))
+            })
+    }
+
+    async function handleGroupRemove() {
+        await api.get(`/group/removeGroup/${id}`)
+            .then(response => {
+                console.log(response.data)
+                navigation.navigate('groups')
+            }).catch(err => {
+                Alert.alert(String(err.message))
+            })
+    }
+
+    useFocusEffect(useCallback(() => {
+        handlePlayersList()
+    }, [team, players]))
 
     return (
         <Container>
@@ -38,7 +72,7 @@ export function Players() {
             />
 
             <Highlight
-                title={group}
+                title={groupName}
                 subtitle="Adicione a galera e separe os times"
             />
             <Form>
@@ -52,13 +86,21 @@ export function Players() {
 
             <HeaderList>
                 <FlatList
-                    data={['Time A', 'Time B']}
-                    keyExtractor={item => item}
+                    data={[
+                        {
+                            title: 'Time A',
+                            sigle: 'A'
+                        },
+                        {
+                            title: 'Time B',
+                            sigle: 'B'
+                        }]}
+                    keyExtractor={item => item.sigle}
                     renderItem={({ item }) => (
                         <Filter
-                            title={item}
-                            isActive={item === team && (true)}
-                            onPress={() => setTeam(item)}
+                            title={item.title}
+                            isActive={item.sigle === team && (true)}
+                            onPress={() => setTeam(item.sigle)}
                         />
                     )}
                     horizontal
@@ -71,10 +113,11 @@ export function Players() {
 
             <FlatList
                 data={players}
-                keyExtractor={item => item}
+                keyExtractor={item => item.id}
                 renderItem={({ item }) => (
                     <PlayerCard
-                        name={item}
+                        name={item.name}
+                        remove={() => handlePlayerRemove(item.id)}
                     />
                 )}
                 ListEmptyComponent={() => (
@@ -94,6 +137,7 @@ export function Players() {
             <Button
                 title="Remover Turma"
                 type="SECONDARY"
+                onPress={handleGroupRemove}
             />
 
         </Container>

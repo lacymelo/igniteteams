@@ -1,15 +1,31 @@
-import { Button } from "@components/Button";
-import { Header } from "@components/Header";
-import { Highlight } from "@components/Highlight";
-import { Input } from "@components/Input";
-import { useNavigation } from "@react-navigation/native";
-import { Container, Content, Icon } from "./styles";
+import { useState, useEffect } from 'react'
+import { Alert } from 'react-native'
+import { Button } from "@components/Button"
+import { Header } from "@components/Header"
+import { Highlight } from "@components/Highlight"
+import { Input } from "@components/Input"
+import { Container, Content, Icon } from "./styles"
+// import { api } from '@services/api'
+import { useNavigation } from '@react-navigation/native'
+import { api } from '@services/api'
+
+type MessageError = {
+    status?: string
+    message: string
+}
 
 export function NewGroup() {
     const navigation = useNavigation()
+    const [name, setName] = useState('')
 
-    function handlePlayers() {
-        navigation.navigate("players", { group: 'rockeseat' })
+    async function handleSave() {
+        await api.post('/group/create', { name })
+            .then(response => {
+                console.log('data - ', response.data)
+            }).catch(err => {
+                console.log(err.message)
+                Alert.alert(String(err.message))
+            })
     }
 
     return (
@@ -28,11 +44,13 @@ export function NewGroup() {
 
                 <Input
                     placeholder="Nome da turma"
+                    value={name}
+                    onChangeText={setName}
                 />
 
                 <Button
                     title="Criar"
-                    onPress={handlePlayers}
+                    onPress={handleSave}
                 />
             </Content>
         </Container>

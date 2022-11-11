@@ -52,6 +52,9 @@ Desenvolvimento do projeto Ignite Teams. A proposta de ajudar a organizar pessoa
     ## 🔖 Dependências que o react navigation precisa
         ✨ npx expo install react-native-screens react-native-safe-area-context
         ✨ yarn add @react-navigation/native-stack
+
+    # 🛠️ Biblioteca para realizar requisições na api
+    ✨ yarn add axios
 ```
 ## :arrow_forward: Como Executar
 

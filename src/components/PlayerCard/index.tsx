@@ -3,9 +3,10 @@ import { Container, Icon, Name } from "./styles";
 
 type Props = {
     name: string
+    remove: () => void
 }
 
-export function PlayerCard({ name }: Props) {
+export function PlayerCard({ name, remove }: Props) {
     return (
         <Container>
             <Icon
@@ -19,6 +20,7 @@ export function PlayerCard({ name }: Props) {
             <ButtonIcon
                 icon="close"
                 type="SECONDARY"
+                onPress={remove}
             />
         </Container>
     )

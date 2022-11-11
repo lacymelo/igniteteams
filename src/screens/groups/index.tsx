@@ -1,19 +1,39 @@
+import { useEffect, useState, useCallback } from 'react'
 import { useNavigation } from "@react-navigation/native"
 import { Container, TeamList } from "./styles"
 import { FlatList } from "react-native"
 import { GroupCard } from "@components/GroupCard"
 import { Header } from "@components/Header"
 import { Highlight } from "@components/Highlight"
-import { useState } from "react"
 import { ListEmpty } from "@components/ListEmpty"
 import { Button } from "@components/Button"
+import { api } from '@services/api'
+
+type Group = {
+    id: string
+    name: string
+}
 
 export function Groups() {
     const navigation = useNavigation()
-    const [groups, setGroups] = useState<string[]>(
-        []
-        // ["Galera do LABEX", 'Galera Rocketseat', 'Galera da Rua', 'Galera da Igreja', 'Conjunto de professores', 'Fofoqueiros de Plantão']
-    )
+    const [groups, setGroups] = useState<Group[]>([])
+
+    useEffect(useCallback(() => {
+        handleGroupsList()
+    }, []))
+
+    async function handleGroupsList() {
+        await api.get('/group/groupsList')
+            .then(response => {
+                setGroups(response.data)
+            }).catch(err => {
+                console.log('deu erro', err.message)
+            })
+    }
+
+    function handleGroup(id: string) {
+        navigation.navigate('players', { id })
+    }
 
     function handleNewGroup() {
         navigation.navigate('new')
@@ -31,9 +51,11 @@ export function Groups() {
             <TeamList>
                 <FlatList
                     data={groups}
-                    keyExtractor={(item) => item}
+                    keyExtractor={(item) => item.id}
                     renderItem={({ item }) =>
-                        <GroupCard title={item}
+                        <GroupCard
+                            title={item.name}
+                            onPress={() => handleGroup(item.id)}
                         />
                     }
                     ListEmptyComponent={() => <ListEmpty message="Que tal cadastrar a primeira turma?" />}
