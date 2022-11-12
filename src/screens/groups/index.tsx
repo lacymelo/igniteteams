@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useNavigation } from "@react-navigation/native"
 import { Container, TeamList } from "./styles"
-import { FlatList } from "react-native"
+import { Alert, FlatList } from "react-native"
 import { GroupCard } from "@components/GroupCard"
 import { Header } from "@components/Header"
 import { Highlight } from "@components/Highlight"
@@ -27,7 +27,8 @@ export function Groups() {
             .then(response => {
                 setGroups(response.data)
             }).catch(err => {
-                console.log('deu erro', err.message)
+                const { data } = err.response
+                Alert.alert('Alerta', data.message)
             })
     }
 

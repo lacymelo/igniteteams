@@ -50,7 +50,9 @@ export function Players() {
                 console.log(response.data)
                 setIsActive(true)
             }).catch(err => {
-                Alert.alert(String(err.message))
+                const { data } = err.response
+
+                Alert.alert('Remover Jogador', data.message)
             })
     }
 
@@ -60,7 +62,7 @@ export function Players() {
                 console.log(response.data)
                 navigation.navigate('groups')
             }).catch(err => {
-                Alert.alert(String(err.message))
+                Alert.alert('Remover Grupo', err.message)
             })
     }
 
@@ -75,7 +77,8 @@ export function Players() {
             setName('')
             setIsActive(true)
         }).catch(err => {
-            Alert.alert(String(err.message))
+            const { data } = err.response
+            Alert.alert('Alerta', data.message)
         })
     }
 

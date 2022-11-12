@@ -9,11 +9,6 @@ import { Container, Content, Icon } from "./styles"
 import { useNavigation } from '@react-navigation/native'
 import { api } from '@services/api'
 
-type MessageError = {
-    status?: string
-    message: string
-}
-
 export function NewGroup() {
     const navigation = useNavigation()
     const [name, setName] = useState('')
@@ -24,8 +19,9 @@ export function NewGroup() {
                 console.log('data - ', response.data)
                 navigation.navigate('groups')
             }).catch(err => {
-                console.log(err.message)
-                Alert.alert(String(err.message))
+                const { data } = err.response
+
+                Alert.alert('Novo Grupo', data.message)
             })
     }
 
