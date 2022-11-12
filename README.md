@@ -3,7 +3,9 @@
 </h1>
 
 <h1 align="center">
-    <img alt="telas" title="Telas IgniteTeams" src="src/assets/telas-igniteteams.PNG" width="100%" />
+    <img alt="telas" title="groups" src="src/assets/groups.jpg" width="30%" />
+    <img alt="telas" title="new-group" src="src/assets/new-group.jpg" width="30%" />
+    <img alt="telas" title="players" src="src/assets/players.jpg" width="30%" />
 </h1>
 
 
