@@ -1,6 +1,10 @@
-<!-- <h1 align="center">
-    <img alt="logo-hambre" title="Hambre Loja" src="src/assets/logo-hambre-readme.png" width="220px" />
-</h1> -->
+<h1 align="center">
+    <img alt="logo" title="Logo" src="src/assets/logo.png" />
+</h1>
+
+<h1 align="center">
+    <img alt="telas" title="Telas IgniteTeams" src="src/assets/telas-igniteteams.PNG" width="100%" />
+</h1>
 
 
 ## 💻 Projeto IGNITE TEAMS
