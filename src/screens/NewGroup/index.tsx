@@ -22,6 +22,7 @@ export function NewGroup() {
         await api.post('/group/create', { name })
             .then(response => {
                 console.log('data - ', response.data)
+                navigation.navigate('groups')
             }).catch(err => {
                 console.log(err.message)
                 Alert.alert(String(err.message))

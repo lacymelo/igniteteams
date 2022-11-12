@@ -31,6 +31,8 @@ export function Players() {
     const [groupName, setGroupName] = useState('')
     const [team, setTeam] = useState('A')
     const [players, setPlayers] = useState<Players[]>([])
+    const [name, setName] = useState('')
+    const [isActive, setIsActive] = useState(false)
 
     async function handlePlayersList() {
         await api.get(`/group/groupSearch/${id}/${team}`)
@@ -46,6 +48,7 @@ export function Players() {
         await api.get(`/player/remove/${id}`)
             .then(response => {
                 console.log(response.data)
+                setIsActive(true)
             }).catch(err => {
                 Alert.alert(String(err.message))
             })
@@ -61,9 +64,25 @@ export function Players() {
             })
     }
 
+    async function handleCreatePlayer() {
+        await api.post(`/player/create/${id}`,
+            {
+                name,
+                team
+            }
+        ).then(response => {
+            console.log(response.data)
+            setName('')
+            setIsActive(true)
+        }).catch(err => {
+            Alert.alert(String(err.message))
+        })
+    }
+
     useFocusEffect(useCallback(() => {
         handlePlayersList()
-    }, [team, players]))
+        setIsActive(false)
+    }, [team, isActive]))
 
     return (
         <Container>
@@ -75,13 +94,19 @@ export function Players() {
                 title={groupName}
                 subtitle="Adicione a galera e separe os times"
             />
+
             <Form>
                 <Input
                     placeholder="Nome do participante"
                     autoCorrect={false}
+                    value={name}
+                    onChangeText={setName}
                 />
 
-                <ButtonIcon icon="add" />
+                <ButtonIcon
+                    icon="add"
+                    onPress={handleCreatePlayer}
+                />
             </Form>
 
             <HeaderList>
