@@ -1,6 +1,6 @@
 
-import { useState, useCallback } from 'react'
-import { Alert, FlatList } from 'react-native'
+import { useState, useCallback, useRef } from 'react'
+import { Alert, FlatList, TextInput } from 'react-native'
 import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { Container, Form, HeaderList, NumbersOfPlayers } from "./styles"
 
@@ -13,6 +13,7 @@ import { PlayerCard } from '@components/PlayerCard'
 import { ListEmpty } from '@components/ListEmpty'
 import { Button } from '@components/Button'
 import { api } from '@services/api'
+import { Loading } from '@components/Loading'
 
 type RouteParams = {
     id: string
@@ -33,14 +34,20 @@ export function Players() {
     const [players, setPlayers] = useState<Players[]>([])
     const [name, setName] = useState('')
     const [isActive, setIsActive] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+
+    const NewPlayerNameInputRef = useRef<TextInput>(null)
 
     async function handlePlayersList() {
+        setIsLoading(true)
         await api.get(`/group/groupSearch/${id}/${team}`)
             .then((response) => {
                 const { id, name, players } = response.data
 
                 setGroupName(name)
                 setPlayers(players)
+            }).finally(() => {
+                setIsLoading(false)
             })
     }
 
@@ -62,7 +69,8 @@ export function Players() {
                 console.log(response.data)
                 navigation.navigate('groups')
             }).catch(err => {
-                Alert.alert('Remover Grupo', err.message)
+                const { data } = err.response
+                Alert.alert('Remover Grupo', data.message)
             })
     }
 
@@ -74,6 +82,7 @@ export function Players() {
             }
         ).then(response => {
             console.log(response.data)
+            NewPlayerNameInputRef.current?.blur()
             setName('')
             setIsActive(true)
         }).catch(err => {
@@ -100,6 +109,7 @@ export function Players() {
 
             <Form>
                 <Input
+                    inputRef={NewPlayerNameInputRef}
                     placeholder="Nome do participante"
                     autoCorrect={false}
                     value={name}
@@ -139,28 +149,34 @@ export function Players() {
                 </NumbersOfPlayers>
             </HeaderList>
 
-            <FlatList
-                data={players}
-                keyExtractor={item => item.id}
-                renderItem={({ item }) => (
-                    <PlayerCard
-                        name={item.name}
-                        remove={() => handlePlayerRemove(item.id)}
+            {
+                isLoading ?
+                    <Loading />
+                    :
+
+                    <FlatList
+                        data={players}
+                        keyExtractor={item => item.id}
+                        renderItem={({ item }) => (
+                            <PlayerCard
+                                name={item.name}
+                                remove={() => handlePlayerRemove(item.id)}
+                            />
+                        )}
+                        ListEmptyComponent={() => (
+                            <ListEmpty
+                                message="Não há pessoas nesse time."
+                            />
+                        )}
+                        showsVerticalScrollIndicator={false}
+                        contentContainerStyle={
+                            [
+                                { paddingBottom: 100 },
+                                players.length === 0 && { flex: 1 }
+                            ]
+                        }
                     />
-                )}
-                ListEmptyComponent={() => (
-                    <ListEmpty
-                        message="Não há pessoas nesse time."
-                    />
-                )}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={
-                    [
-                        { paddingBottom: 100 },
-                        players.length === 0 && { flex: 1 }
-                    ]
-                }
-            />
+            }
 
             <Button
                 title="Remover Turma"
